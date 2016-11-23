@@ -1,19 +1,42 @@
-from keras.models import Sequential
-from keras.layers import Dense, Activation
-from keras.layers import LSTM
+from scraper import read_poems
 
 
-def create_model(seqlen=None, chars=None):
-    model = Sequential()
-    model.add(LSTM(256, input_shape=(seqlen, len(chars)),
-                   return_sequences=True))
-    model.add(LSTM(128, input_shape=(seqlen, len(chars))))
-    model.add(Dense(len(chars)))
-    model.add(Activation('softmax'))
-    return model
+MAPPING = {'masnavi': 'data/moulavi/masnavi/poems',
+           'shahname': 'data/ferdousi/shahname/poems'}
 
 
-def load_trained_model(weights_path, seqlen=None, chars=None):
-    model = create_model(seqlen=seqlen, chars=chars)
-    model.load_weights(weights_path)
-    return model
+def load_poems(path, verses=[], text=""):
+    poems = read_poems(path)
+    for poem in poems:
+        for i in xrange(0, len(poem), 2):
+            hemistich1 = poem[i].strip()
+            hemistich2 = poem[i+1].strip()
+            verse = hemistich1 + u'.' + hemistich2 + u'.'
+            verses.append(verse)
+            text = text + verse
+    return text, verses
+
+
+def sort_poems(verses):
+    mydic = {}
+    for verse in verses:
+        if verse[-2] not in mydic:
+            mydic[verse[-2]] = []
+        mydic[verse[-2]].append(verse)
+    text = ""
+    for k in mydic.keys():
+        for v in mydic[k]:
+            text = text + v
+    return text
+
+
+def load(poems=['masnavi', 'shahname']):
+    verses = []
+    text = ""
+    for poem in poems:
+        if poem in MAPPING.keys():
+            text, verses = load_poems(MAPPING[poem],
+                                      verses=verses, text=text)
+        else:
+            raise KeyError("Poem {} is not found!".format(poem))
+    return sort_poems(verses)

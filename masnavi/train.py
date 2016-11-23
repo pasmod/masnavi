@@ -3,7 +3,6 @@ import arabic_reshaper
 from bidi.algorithm import get_display
 from keras.callbacks import ModelCheckpoint
 import loader
-from scraper.scraper import read_poems
 import numpy as np
 from random import shuffle
 import sys
