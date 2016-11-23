@@ -16,25 +16,27 @@ maxlen = 35
 step = 1
 
 chars = sorted(list(set(text)))
-print('Vocabulary size', len(chars))
 char_indices = dict((c, i) for i, c in enumerate(chars))
 indices_char = dict((i, c) for i, c in enumerate(chars))
 np.save("models/char_indices.npy", char_indices)
 np.save("models/indices_char.npy", indices_char)
 
-sentences = []
-next_chars = []
-for i in range(0, len(text) - maxlen, step):
-    sentences.append(text[i: i + maxlen])
-    next_chars.append(text[i + maxlen])
 
-print('Vectorization...')
-X = np.zeros((len(sentences), maxlen, len(chars)), dtype=np.bool)
-y = np.zeros((len(sentences), len(chars)), dtype=np.bool)
-for i, sentence in enumerate(sentences):
-    for t, char in enumerate(sentence):
-        X[i, t, char_indices[char]] = 1
-    y[i, char_indices[next_chars[i]]] = 1
+def encode(text=None, maxlen=None, step=None):
+    sentences = []
+    next_chars = []
+    for i in range(0, len(text) - maxlen, step):
+        sentences.append(text[i: i + maxlen])
+        next_chars.append(text[i + maxlen])
+    X = np.zeros((len(sentences), maxlen, len(chars)), dtype=np.bool)
+    y = np.zeros((len(sentences), len(chars)), dtype=np.bool)
+    for i, sentence in enumerate(sentences):
+        for t, char in enumerate(sentence):
+            X[i, t, char_indices[char]] = 1
+        y[i, char_indices[next_chars[i]]] = 1
+    return X, y
+
+X, y = encode(text=text, maxlen=maxlen, step=1)
 
 model = keras_utils.create_model(seqlen=maxlen, chars=chars)
 
