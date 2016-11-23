@@ -24,18 +24,23 @@ def load_poems(path, verses=[], text=""):
 
 
 text, verses = load_poems("data/moulavi/masnavi/poems", verses=[], text="")
-text, verses = load_poems("data/ferdousi/shahname/poems", verses=verses, text=text)
+text, verses = load_poems("data/ferdousi/shahname/poems", verses=verses,
+                          text=text)
 
-mydic = {}
-for verse in verses:
-    if verse[-2] not in mydic:
-        mydic[verse[-2]] = []
-    mydic[verse[-2]].append(verse)
 
-text = ""
-for k in mydic.keys():
-    for v in mydic[k]:
-        text = text + v
+def sort_poems(verse):
+    mydic = {}
+    for verse in verses:
+        if verse[-2] not in mydic:
+            mydic[verse[-2]] = []
+        mydic[verse[-2]].append(verse)
+    text = ""
+    for k in mydic.keys():
+        for v in mydic[k]:
+            text = text + v
+    return text
+
+text = sort_poems(verses)
 
 max_verses_length = 60
 max_hemistichs_length = 30
