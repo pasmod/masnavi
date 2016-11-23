@@ -10,51 +10,13 @@ reload(sys)
 sys.setdefaultencoding("utf-8")
 
 
-def load_poems(path, verses=[], text=""):
-    poems = read_poems(path)
-    for poem in poems:
-        for i in xrange(0, len(poem), 2):
-            hemistich1 = poem[i].strip()
-            hemistich2 = poem[i+1].strip()
-            verse = hemistich1 + u'.' + hemistich2 + u'.'
-            verses.append(verse)
-            text = text + verse
-    return text, verses
-
-
-text, verses = load_poems("data/moulavi/masnavi/poems", verses=[], text="")
-text, verses = load_poems("data/ferdousi/shahname/poems", verses=verses,
-                          text=text)
-
-
-def sort_poems(verse):
-    mydic = {}
-    for verse in verses:
-        if verse[-2] not in mydic:
-            mydic[verse[-2]] = []
-        mydic[verse[-2]].append(verse)
-    text = ""
-    for k in mydic.keys():
-        for v in mydic[k]:
-            text = text + v
-    return text
-
-text = sort_poems(verses)
-
+text = loader.load()
 max_verses_length = 60
 max_hemistichs_length = 30
 
 maxlen = max_hemistichs_length + 5
 max_verses_length = maxlen
 step = 1
-
-padded_verses = []
-for verse in verses:
-    diff = max_verses_length - len(verse)
-    padded_verse = verse
-    for i in range(1, diff):
-        padded_verse = padded_verse
-    padded_verses.append(padded_verse)
 
 chars = sorted(list(set(text)))
 print('Vocabulary size', len(chars))
@@ -64,13 +26,6 @@ np.save("char_indices.npy", char_indices)
 np.save("indices_char.npy", indices_char)
 
 step = 1
-sentences = []
-next_chars = []
-for verse in padded_verses:
-    for i in range(0, len(verse) - max_hemistichs_length, step):
-        sentences.append(verse[i: i + max_hemistichs_length])
-        next_chars.append(verse[i + max_hemistichs_length])
-
 sentences = []
 next_chars = []
 for i in range(0, len(text) - maxlen, step):
