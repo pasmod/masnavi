@@ -12,7 +12,7 @@ sys.setdefaultencoding("utf-8")
 
 
 def load_poems(path, verses=[], text=""):
-    poems = read_poems('data/moulavi/masnavi/poems')
+    poems = read_poems(path)
     for poem in poems:
         for i in xrange(0, len(poem), 2):
             hemistich1 = poem[i].strip()
@@ -24,7 +24,7 @@ def load_poems(path, verses=[], text=""):
 
 
 text, verses = load_poems("data/moulavi/masnavi/poems", verses=[], text="")
-text, verses = load_poems("data/moulavi/masnavi/poems", verses=verses, text=text)
+text, verses = load_poems("data/ferdousi/shahname/poems", verses=verses, text=text)
 print len(text)
 print len(verses)
 
