@@ -1,4 +1,4 @@
-from scraper import read_poems
+from scraper.scraper import read_poems
 
 
 MAPPING = {'masnavi': 'data/moulavi/masnavi/poems',
@@ -6,7 +6,7 @@ MAPPING = {'masnavi': 'data/moulavi/masnavi/poems',
 
 
 def load_poems(path, verses=[], text=""):
-    poems = read_poems(path)
+    poems = read_poems(path)[0:10]
     for poem in poems:
         for i in xrange(0, len(poem), 2):
             hemistich1 = poem[i].strip()
