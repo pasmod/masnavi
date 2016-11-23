@@ -25,31 +25,6 @@ def load_poems(path, verses=[], text=""):
 
 text, verses = load_poems("data/moulavi/masnavi/poems", verses=[], text="")
 text, verses = load_poems("data/ferdousi/shahname/poems", verses=verses, text=text)
-print len(text)
-print len(verses)
-
-masnavi_poems = read_poems('data/moulavi/masnavi/poems')
-shahname_poems = read_poems('data/ferdousi/shahname/poems')
-verses = []
-text = ""
-for poem in masnavi_poems:
-    for i in xrange(0, len(poem), 2):
-        hemistich1 = poem[i].strip()
-        hemistich2 = poem[i+1].strip()
-        verse = hemistich1 + u'.' + hemistich2 + u'.'
-        verses.append(verse)
-        text = text + verse
-
-for poem in shahname_poems:
-    for i in xrange(0, len(poem), 2):
-        hemistich1 = poem[i].strip()
-        hemistich2 = poem[i+1].strip()
-        verse = hemistich1 + u'.' + hemistich2 + u'.'
-        verses.append(verse)
-        text = text + verse
-
-print len(text)
-print len(verses)
 
 mydic = {}
 for verse in verses:
