@@ -31,8 +31,6 @@ print len(verses)
 masnavi_poems = read_poems('data/moulavi/masnavi/poems')
 shahname_poems = read_poems('data/ferdousi/shahname/poems')
 verses = []
-hemistichs_lengths = []
-verses_lengths = []
 text = ""
 for poem in masnavi_poems:
     for i in xrange(0, len(poem), 2):
@@ -40,9 +38,6 @@ for poem in masnavi_poems:
         hemistich2 = poem[i+1].strip()
         verse = hemistich1 + u'.' + hemistich2 + u'.'
         verses.append(verse)
-        hemistichs_lengths.append(len(hemistich1))
-        hemistichs_lengths.append(len(hemistich2))
-        verses_lengths.append(np.mean(verse))
         text = text + verse
 
 for poem in shahname_poems:
@@ -51,9 +46,6 @@ for poem in shahname_poems:
         hemistich2 = poem[i+1].strip()
         verse = hemistich1 + u'.' + hemistich2 + u'.'
         verses.append(verse)
-        hemistichs_lengths.append(len(hemistich1))
-        hemistichs_lengths.append(len(hemistich2))
-        verses_lengths.append(len(verse))
         text = text + verse
 
 print len(text)
@@ -70,8 +62,8 @@ for k in mydic.keys():
     for v in mydic[k]:
         text = text + v
 
-max_verses_length = max(verses_lengths)
-max_hemistichs_length = max(hemistichs_lengths)
+max_verses_length = 60
+max_hemistichs_length = 30
 
 maxlen = max_hemistichs_length + 5
 max_verses_length = maxlen
