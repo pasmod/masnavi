@@ -25,7 +25,6 @@ indices_char = dict((i, c) for i, c in enumerate(chars))
 np.save("char_indices.npy", char_indices)
 np.save("indices_char.npy", indices_char)
 
-step = 1
 sentences = []
 next_chars = []
 for i in range(0, len(text) - maxlen, step):
