@@ -7,7 +7,7 @@
 ###########################
 
 # Set the name of the job
-#PBS -N pisco
+#PBS -N paradox
 
 # Specify the maximum wall clock time. The wall
 # clock time should take possible queue waiting time into
