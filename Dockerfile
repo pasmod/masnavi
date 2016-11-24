@@ -23,4 +23,3 @@ ADD . .
 RUN mkdir piplib
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt -t piplib
-# RUN py.test --pep8
