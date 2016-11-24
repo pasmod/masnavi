@@ -8,11 +8,12 @@ import keras_utils
 import loader
 import random
 
-
+# Maximum sequence length
 maxlen = 35
+# Step size for moving over the text
 step = 1
-text = loader.load(poems=['masnavi', 'shahname'])
 
+text = loader.load(poems=['masnavi', 'shahname'])
 X, y, char_indices, indices_char = keras_utils.encode(text=text,
                                                       maxlen=maxlen,
                                                       step=1)
@@ -21,7 +22,6 @@ np.save("models/indices_char.npy", indices_char)
 np.save("models/props.npy", {"seqlen": maxlen, "chars": char_indices.keys()})
 
 model = keras_utils.create_model(seqlen=maxlen, vocab=char_indices.keys())
-
 model.compile(loss='categorical_crossentropy', optimizer='adam')
 filepath = "weights-improvement-{epoch:02d}-{loss:.2f}.hdf5"
 checkpoint = ModelCheckpoint(filepath,
@@ -30,6 +30,7 @@ checkpoint = ModelCheckpoint(filepath,
                              save_best_only=True,
                              mode='min')
 callbacks_list = [checkpoint]
+
 
 for iteration in range(1, 100):
     print('-' * 50)

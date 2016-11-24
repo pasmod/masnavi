@@ -6,6 +6,16 @@ MAPPING = {'masnavi': 'data/moulavi/masnavi/poems',
 
 
 def load_poems(path, verses=[], text=""):
+    """Loads poems stored in the path in a structured format.
+
+    Args:
+        path: path to the poems.
+        verses: will be populated with verses of the poems.
+        text: will be extended with poems.
+    Returns:
+        text: concatenation of all poems
+        verses: a list of verses
+    """
     poems = read_poems(path)[0:10]
     for poem in poems:
         for i in xrange(0, len(poem), 2):
@@ -18,6 +28,13 @@ def load_poems(path, verses=[], text=""):
 
 
 def sort_poems(verses):
+    """Sorts poems based on their last characters in the verses.
+
+    Args:
+        verses: a list of verses.
+    Returns:
+        text: text containing the sorted poems.
+    """
     mydic = {}
     for verse in verses:
         if verse[-2] not in mydic:
@@ -31,6 +48,13 @@ def sort_poems(verses):
 
 
 def load(poems=['masnavi', 'shahname']):
+    """loads poems as a string.
+
+    Args:
+        poems: a list containing names of the poems.
+    Returns:
+        text: text containing the sorted poems.
+    """
     verses = []
     text = ""
     for poem in poems:

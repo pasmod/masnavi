@@ -3,8 +3,17 @@ import loader
 
 
 def load_numpy_model(modelpath):
+    """Loads the stored numpy objects.
+
+    Args:
+        modelpath: path to the model files.
+    Returns:
+        numpy object containing the model.
+    """
     return np.load(modelpath).item()
 
+
+# Load all stored models
 props = load_numpy_model("models/props.npy")
 seqlen = props["seqlen"]
 chars = props["chars"]
@@ -15,6 +24,14 @@ model = loader.load_trained_model("models/weights.hdf5",
 
 
 def sample(preds, temperature=1.0):
+    """Samples from a probability distribution.
+
+    Args:
+        preds: probabilities returned by the softmax layer.
+        temperature: higher temperatures result in higher creativity!
+    Returns:
+        the maximum of preds
+    """
     preds = np.asarray(preds).astype('float64')
     preds = np.log(preds) / temperature
     exp_preds = np.exp(preds)
@@ -24,6 +41,14 @@ def sample(preds, temperature=1.0):
 
 
 def predict(poem, diversity=0.3):
+    """Given a model, predict the rest of the poem.
+
+    Args:
+        poem: starting point for poem generation.
+        diversity: higher diversity results in higher creativity!
+    Returns:
+        generated: the generated poem
+    """
     generated = ''
     sentence = poem[0: seqlen]
     generated += sentence
