@@ -20,6 +20,5 @@ RUN pip install gunicorn
 
 WORKDIR /var/www
 ADD . .
-RUN mkdir piplib
 RUN pip install --upgrade pip
-RUN pip install -r requirements.txt -t piplib
+RUN pip install -r requirements.txt
