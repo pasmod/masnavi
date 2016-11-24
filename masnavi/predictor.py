@@ -1,5 +1,5 @@
 import numpy as np
-import loader
+import keras_utils
 
 
 def load_numpy_model(modelpath):
@@ -16,11 +16,11 @@ def load_numpy_model(modelpath):
 # Load all stored models
 props = load_numpy_model("models/props.npy")
 seqlen = props["seqlen"]
-chars = props["chars"]
+vocab = props["chars"]
 char_indices = load_numpy_model("models/char_indices.npy")
 indices_char = load_numpy_model("models/indices_char.npy")
-model = loader.load_trained_model("models/weights.hdf5",
-                                  seqlen=seqlen, chars=chars)
+model = keras_utils.load_trained_model("models/weights.hdf5",
+                                       seqlen=seqlen, vocab=vocab)
 
 
 def sample(preds, temperature=1.0):
@@ -53,7 +53,7 @@ def predict(poem, diversity=0.3):
     sentence = poem[0: seqlen]
     generated += sentence
     for i in range(400):
-        x = np.zeros((1, seqlen, len(chars)))
+        x = np.zeros((1, seqlen, len(vocab)))
         for t, char in enumerate(sentence):
             x[0, t, char_indices[char]] = 1
 
