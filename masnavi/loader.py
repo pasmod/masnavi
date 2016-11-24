@@ -16,7 +16,7 @@ def load_poems(path, verses=[], text=""):
         text: concatenation of all poems
         verses: a list of verses
     """
-    poems = read_poems(path)[0:10]
+    poems = read_poems(path)
     for poem in poems:
         for i in xrange(0, len(poem), 2):
             hemistich1 = poem[i].strip()
