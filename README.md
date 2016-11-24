@@ -1,7 +1,7 @@
 # Manavi: Automatic Poem Generation
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg?maxAge=2592000)](https://github.com/pasmod/masnavi/blob/master/License.md)
 
-Masnavi is a tool to automatically generate poems in Farsi. It uses a characters based language model trained using a recurrent neural network on lots of Farsi poems. The tool produces poems in the Manavi style. For more information on Masnavi click [here](https://en.wikipedia.org/wiki/Masnavi).
+Masnavi is a tool to automatically generate poems in Farsi. It uses a character based language model trained using a recurrent neural network on lots of Farsi poems. The tool produces poems in the Manavi style. For more information on Masnavi click [here](https://en.wikipedia.org/wiki/Masnavi).
 
 ## How to Train
 For training you need probably a GPU. To train the network use the following command:
@@ -23,5 +23,5 @@ Now the web application runs as daemon in background. Simply point your browser 
 
 
 # ToDos
-- Processing poem generation requests take up to 30 seconds. Show the user a message that we are processing the request and the app is not crashed!
+- Processing poem generation requests takes up to 30 seconds. Show the user a message that we are processing the request and the app is not crashed!
         
