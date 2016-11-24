@@ -15,8 +15,3 @@ start: stop
 run: stop
 	docker run -it --rm=true -v $(shell pwd):/var/www \
 		--name=$(name) $(name) bash -l
-push:
-	gcloud build-it gcr.io/$(name)/masnavi
-
-deploy:
-	appcfg.py update -A $(name) -V v3 .
