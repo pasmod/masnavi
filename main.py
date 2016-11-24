@@ -7,10 +7,10 @@ from random import shuffle
 import os
 
 app = Flask(__name__)
+
 masnavi_poems = read_poems('data/moulavi/masnavi/poems')
 shahname_poems = read_poems('data/ferdousi/shahname/poems')
 hemistichs = []
-CACHE_TIMEOUT = 300
 for poem in masnavi_poems:
     for i in xrange(0, len(poem), 2):
         hemistich1 = poem[i].strip()
@@ -35,7 +35,6 @@ def generate(wait=True):
     shuffle(indices)
     verse = hemistichs[indices[0]][0] + '.' + hemistichs[indices[0]][1] + '.'
     poem = predict(verse)
-    print(poem)
     result = []
     parts = poem.split(".")
     if len(parts) % 2 != 0:
