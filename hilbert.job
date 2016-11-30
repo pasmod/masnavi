@@ -15,14 +15,14 @@
 # Be sure to specify a reasonable value here.
 # If the job does not finish by the time reached,
 # the job is terminated.
-#PBS -l walltime=48:00:00
+#PBS -l walltime=24:00:00
 
 # Send mail when job is aborted
 #PBS -m abe
 #PBS -M p.modaresi@gmx.de
 
 # Manage resources
-#PBS -l select=1:mem=20gb:ngpus=1
+#PBS -l select=1:mem=10gb:ngpus=1
 
 #PBS -A AGENT
 
@@ -49,7 +49,7 @@ echo ------------------------------------------------------
 module load Python/2.7.5
 
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/pamod100/lib
-export PYTHONPATH=$PYTHONPATH:/software/python/2.7.5/login/bin/python
+export PYTHONPATH=$PYTHONPATH:~/miniconda2/bin/python
 
 
 ###### EXECUTION ######
