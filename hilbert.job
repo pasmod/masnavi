@@ -46,7 +46,7 @@ echo PBS: current home directory is $PBS_O_HOME
 echo PBS: PATH = $PBS_O_PATH
 echo ------------------------------------------------------
 
-module load Python/2.7.5
+module load CUDA
 
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/pamod100/lib
 export PYTHONPATH=$PYTHONPATH:~/miniconda2/bin/python
