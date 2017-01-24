@@ -23,7 +23,7 @@ np.save("models/props.npy", {"seqlen": maxlen, "chars": char_indices.keys()})
 
 model = keras_utils.create_model(seqlen=maxlen, vocab=char_indices.keys())
 model.compile(loss='categorical_crossentropy', optimizer='adam')
-filepath = "weights-improvement-{epoch:02d}-{loss:.2f}.hdf5"
+filepath = "models/weights.hdf5"
 checkpoint = ModelCheckpoint(filepath,
                              monitor='loss',
                              verbose=1,
