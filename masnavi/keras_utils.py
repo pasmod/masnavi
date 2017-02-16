@@ -14,9 +14,9 @@ def create_model(seqlen=None, vocab=None):
         model: an uncompiled keras model
     """
     model = Sequential()
-    model.add(LSTM(1024, input_shape=(seqlen, len(vocab)),
+    model.add(LSTM(512, input_shape=(seqlen, len(vocab)),
                    return_sequences=True))
-    model.add(LSTM(512, input_shape=(seqlen, len(vocab))))
+    model.add(LSTM(256, input_shape=(seqlen, len(vocab))))
     model.add(Dense(len(vocab)))
     model.add(Activation('softmax'))
     return model
