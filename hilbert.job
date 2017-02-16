@@ -15,7 +15,7 @@
 # Be sure to specify a reasonable value here.
 # If the job does not finish by the time reached,
 # the job is terminated.
-#PBS -l walltime=24:00:00
+#PBS -l walltime=48:00:00
 
 # Send mail when job is aborted
 #PBS -m abe
@@ -54,4 +54,4 @@ export PYTHONPATH=$PYTHONPATH:~/miniconda2/bin/python
 
 ###### EXECUTION ######
 theano-cache clear
-python /home/pamod100/src/masnavi/masnavi/generator.py
+THEANO_FLAGS=device=gpu0,floatX=float32 python /home/pamod100/src/masnavi/masnavi/train.py
