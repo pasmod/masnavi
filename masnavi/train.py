@@ -23,7 +23,7 @@ np.save("models/props.npy", {"seqlen": maxlen, "chars": char_indices.keys()})
 
 model = keras_utils.create_model(seqlen=maxlen, vocab=char_indices.keys())
 model.compile(loss='categorical_crossentropy', optimizer='adam')
-filepath = "weights-improvement-{epoch:02d}-{loss:.2f}.hdf5"
+filepath = "models/weights.hdf5"
 checkpoint = ModelCheckpoint(filepath,
                              monitor='loss',
                              verbose=1,
@@ -32,10 +32,10 @@ checkpoint = ModelCheckpoint(filepath,
 callbacks_list = [checkpoint]
 
 
-for iteration in range(1, 100):
+for iteration in range(1, 20):
     print('-' * 50)
     print('Iteration', iteration)
-    model.fit(X, y, batch_size=512, nb_epoch=1, callbacks=callbacks_list)
+    model.fit(X, y, batch_size=64, nb_epoch=1, callbacks=callbacks_list)
     print("Fit finished!")
     start_index = random.randint(0, len(text) - maxlen - 1)
     for diversity in [0.1, 0.2, 0.3, 0.4]:
